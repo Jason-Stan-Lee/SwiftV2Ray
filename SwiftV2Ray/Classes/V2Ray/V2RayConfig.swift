@@ -15,7 +15,7 @@ struct V2RayConfig: Codable {
     var api: Api?
     var dns: Dns?
     var stats: Stats?
-    var routing: Routing?
+    var routing: Routing.Setting?
     var policy: Policy?
     var inbounds: [Inbound]?
     var outbounds: [Outbound]?
@@ -36,8 +36,8 @@ extension Decodable {
 // MARK: - Log
 struct Log: Codable {
     var loglevel: Level = .info
-    var error: String = ""
-    var access: String = ""
+    var error: String?
+    var access: String?
     
     enum Level: String, Codable {
         case debug
@@ -56,6 +56,7 @@ struct Api: Codable {
 // MARK: - DNS
 struct Dns: Codable {
     var servers: [String] = ["1.1.1.1", "8.8.8.8", "8.8.4.4", "119.29.29.29", "114.114.114.114", "223.5.5.5", "223.6.6.6"]
+    let hosts: [String: String]?
 }
 
 // MARK: - Stats
@@ -100,7 +101,7 @@ struct Policy: Codable {
 
 // MARK: - Inbound
 struct Inbound: Codable {
-    var port: String = "1080"
+    var port: Int = 1080
     var listen: String = "127.0.0.1"
     var `protocol`: Protocol = .socks
     var tag: String? = nil
@@ -108,8 +109,8 @@ struct Inbound: Codable {
     var sniffing: Sniffing? = nil
     var allocate: Allocate? = nil
 
-    var settingHttp: Http = Http()
-    var settingSocks: Socks = Socks()
+    var settingHttp: Http? = Http()
+    var settingSocks: Socks? = Socks()
     var settingShadowsocks: Shadowsocks? = nil
     var settingVMess: VMess? = nil
 
@@ -152,9 +153,9 @@ struct Inbound: Codable {
     }
 
     struct Http: Codable {
-        var timeout: Int = 360
+        var timeout: Int? = 360
         var allowTransparent: Bool?
-        var userLevel: Int?
+        var userLevel: Int = 8
         var accounts: [Account]?
         
         struct Account: Codable {
@@ -176,7 +177,7 @@ struct Inbound: Codable {
         var accounts: [Account]?
         var udp: Bool = true
         var ip: String?
-        var timeout: Int = 360
+        var timeout: Int? = 360
         var userLevel: Int?
         
         struct Account: Codable {
@@ -210,7 +211,7 @@ struct Inbound: Codable {
     
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        port = try container.decode(String.self, forKey: .port)
+        port = try container.decode(Int.self, forKey: .port)
         listen = try container.decode(String.self, forKey: .listen)
         `protocol` = try container.decode(Protocol.self, forKey: .`protocol`)
         
@@ -294,7 +295,9 @@ struct Outbound: Codable {
     
     struct Mux: Codable {
         var enabled: Bool = false
-        var concurrency: Int? = 8
+        var concurrency: Int? = -1
+        var xudpConcurrency: Int?
+        var xudpProxyUDP443: String?
     }
 
     struct Blackhole: Codable {
@@ -306,9 +309,9 @@ struct Outbound: Codable {
     }
 
     struct Freedom: Codable {
-        var domainStrategy: String = "AsIs" // UseIP | AsIs
+        var domainStrategy: String? = "AsIs" // UseIP | AsIs
         var redirect: String?
-        var userLevel: Int = 0
+        var userLevel: Int? = 0
     }
 
     struct Shadowsocks: Codable {

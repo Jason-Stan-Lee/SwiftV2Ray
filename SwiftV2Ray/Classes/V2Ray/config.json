@@ -1,44 +1,112 @@
 {
-    "policy":{
-        "levels": {
-            "0": {
-              "handshake": 4,
-              "connIdle": 3,
-              "uplinkOnly": 0,
-              "downlinkOnly": 0,
-              "statsUserUplink": false,
-              "statsUserDownlink": false,
-              "bufferSize": 0
-            }
+    "dns": {
+        "hosts": {
+            "domain:googleapis.cn": "googleapis.com"
         },
-        "system": {
-            "statsInboundUplink": false,
-            "statsInboundDownlink": false
+        "servers": [
+            "1.1.1.1"
+        ]
+    },
+    "inbounds": [
+        {
+            "listen": "127.0.0.1",
+            "port": 10808,
+            "protocol": "socks",
+            "settings": {
+                "auth": "noauth",
+                "udp": true,
+                "userLevel": 8
+            },
+            "sniffing": {
+                "destOverride": [
+                    "http",
+                    "tls"
+                ],
+                "enabled": true
+            },
+            "tag": "socks"
+        },
+        {
+            "listen": "127.0.0.1",
+            "port": 10809,
+            "protocol": "http",
+            "settings": {
+                "userLevel": 8
+            },
+            "tag": "http"
         }
+    ],
+    "log": {
+        "loglevel": "debug",
     },
     "outbounds":[
         {
-            "mux":{
-                "enabled": true,
-                "concurrency": 1024
+            "mux": {
+                "concurrency": -1,
+                "enabled": false,
+                "xudpConcurrency": 8,
+                "xudpProxyUDP443": ""
             },
-            "protocol":"vmess",
-            "settings":{
-                "vnext":[
+            "protocol": "vmess",
+            "settings": {
+                "vnext": [
                     {
-                        "address":"ssl.miwukeji.net",
-                        "users":[
+                        "address": "c33s3.jjcruises.com",
+                        "port": 5326,
+                        "users": [
                             {
-                                "id":"29f1ae2e-e29d-d804-7bcd-e01b5dfcf26a",
-                                "alterId":64,
-                                "level":0,
-                                "security":"auto"
+                                "alterId": 0,
+                                "encryption": "",
+                                "flow": "",
+                                "id":"a3150c13-17e0-448a-82a3-c7a7f1a9d94b",
+                                "level": 8,
+                                "security": "auto"
                             }
-                        ],
-                        "port":443
+                        ]
                     }
                 ]
-            }
+            },
+            "streamSettings": {
+                "network": "tcp",
+                "security": "none",
+                "tcpSettings": {
+                    "header": {
+                        "type": "none"
+                    }
+                }
+            },
+            "tag": "proxy"
+        },
+        {
+            "protocol": "freedom",
+            "settings": {},
+            "tag": "direct"
+        },
+        {
+            "protocol": "blackhole",
+            "settings": {
+                "response": {
+                    "type": "http"
+                }
+            },
+            "tag": "block"
         }
-    ]
+    ],
+    "routing": {
+        "domainStrategy": "IPIfNonMatch",
+        "rules": [
+            {
+                "ip": [
+                    "1.1.1.1"
+                ],
+                "outboundTag": "proxy",
+                "port": "53",
+                "type": "field"
+            }
+        ]
+    }
 }
+
+
+
+

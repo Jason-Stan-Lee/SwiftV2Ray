@@ -8,6 +8,7 @@
 
 import NetworkExtension
 import Tun2socks
+import OSLog
 
 class PacketTunnelProvider: NEPacketTunnelProvider {
     var message: PacketTunnelMessage? = nil
@@ -15,9 +16,14 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
     override func startTunnel(options: [String : NSObject]?, completionHandler: @escaping (Error?) -> Void) {
         // 启动Tun2scoks
         if let configData = message?.configData {
+            
+            let json = try? JSONSerialization.jsonObject(with: configData) as? [String: Any]
+            os_log("//--------------------------------- startTunnel: %{public}s", json?.description ?? "nil")
+            
             Tun2socksStartV2Ray(self, configData)
         } else {
             completionHandler(NSError(domain: "PacketTunnel", code: -1, userInfo: ["error" : "读取不到配置"]))
+            os_log("//--------------------------------- startTunnelFailed: no config")
             return
         }
         
@@ -29,11 +35,18 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
     }
     
     override func stopTunnel(with reason: NEProviderStopReason, completionHandler: @escaping () -> Void) {
+        os_log("//--------------------------------- stopTunnel: %{public}s", "\(reason)")
         completionHandler()
     }
     
     override func handleAppMessage(_ messageData: Data, completionHandler: ((Data?) -> Void)?) {
         message = try? JSONDecoder().decode(PacketTunnelMessage.self, from: messageData)
+        var desc: String = "nil"
+        if let data = message?.configData,
+           let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any] {
+            desc = json.description
+        }
+        os_log("//--------------------------------- handleAppMessage: %{public}s", desc)
         if let handler = completionHandler {
             handler(messageData)
         }
@@ -55,10 +68,12 @@ extension PacketTunnelProvider {
             return
         }
         
+        os_log("//--------------------------------- setupTunnel serverIP: %{public}s", serverIP)
+
         let networkSettings = NEPacketTunnelNetworkSettings(tunnelRemoteAddress: serverIP)
         networkSettings.mtu = 1500
         
-        let ipv4Settings = NEIPv4Settings(addresses: [serverIP], subnetMasks: ["255.255.255.0"])
+        let ipv4Settings = NEIPv4Settings(addresses: ["26.26.26.2"], subnetMasks: ["255.255.255.252"])
         var includeRoutes: Array<NEIPv4Route> = []
         for route in message.ipv4IncludedRoutes {
             includeRoutes.append(NEIPv4Route(destinationAddress: route.0, subnetMask: route.1))
@@ -81,6 +96,7 @@ extension PacketTunnelProvider {
         networkSettings.proxySettings = proxySettings
         
         self.setTunnelNetworkSettings(networkSettings) {error in
+            os_log("//--------------------------------- setTunnelNetworkSettings: %{public}s", error?.localizedDescription ?? "nil")
             completion(error)
         }
     }
@@ -93,6 +109,7 @@ extension PacketTunnelProvider: Tun2socksPacketFlowProtocol {
                 autoreleasepool{
                     Tun2socksInputPacket(packet)
                 }
+                os_log("//--------------------------------- readPackets: %{public}s", packet.description)
             }
             
             self?.proxyPackets()
@@ -100,6 +117,7 @@ extension PacketTunnelProvider: Tun2socksPacketFlowProtocol {
     }
     
     func writePacket(_ packet: Data?) {
+        os_log("//--------------------------------- writePacket: %{public}s", packet?.description ?? "nil")
         self.packetFlow.writePackets([packet!], withProtocols: [AF_INET as NSNumber])
     }
 }
