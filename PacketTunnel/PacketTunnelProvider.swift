@@ -73,7 +73,7 @@ extension PacketTunnelProvider {
         let networkSettings = NEPacketTunnelNetworkSettings(tunnelRemoteAddress: serverIP)
         networkSettings.mtu = 1500
         
-        let ipv4Settings = NEIPv4Settings(addresses: ["26.26.26.2"], subnetMasks: ["255.255.255.252"])
+        let ipv4Settings = NEIPv4Settings(addresses: ["26.26.26.2", "26.26.26.2"], subnetMasks: ["255.255.255.0", "255.255.255.252"])
         var includeRoutes: Array<NEIPv4Route> = []
         for route in message.ipv4IncludedRoutes {
             includeRoutes.append(NEIPv4Route(destinationAddress: route.0, subnetMask: route.1))

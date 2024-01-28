@@ -16,7 +16,7 @@ struct PacketTunnelMessage {
     var serverIP: String? = nil
     var ipv4IncludedRoutes: ipv4Routes = []
     var ipv4ExcludedRoutes: ipv4Routes = []
-    var dnsServers: [String] = ["8.8.8.8", "8.8.4.4"]
+    var dnsServers: [String] = ["8.8.8.8", "8.8.4.4", "8.8.8.4", "1.1.1.1"]
     var proxyExeptionList: [String]? = nil // 不代理列表
     var proxyMatchDomains: [String]? = nil // 需代理域名
     
