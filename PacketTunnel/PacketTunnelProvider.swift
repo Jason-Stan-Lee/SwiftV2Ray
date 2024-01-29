@@ -18,7 +18,8 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
         if let configData = message?.configData {
             
             let json = try? JSONSerialization.jsonObject(with: configData) as? [String: Any]
-            os_log("//--------------------------------- startTunnel: %{public}s", json?.description ?? "nil")
+            let out = json?["outbounds"] as? [[String: Any]]
+            os_log("//--------------------------------- startTunnel: %{public}s", out?.first?.description ?? "nil")
             
             Tun2socksStartV2Ray(self, configData)
         } else {
