@@ -7,8 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		04F0969E2B67657100876EBB /* Tun2socks.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04F0969D2B67657100876EBB /* Tun2socks.framework */; };
+		04F0969F2B67657100876EBB /* Tun2socks.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04F0969D2B67657100876EBB /* Tun2socks.framework */; };
 		6904B0FB1FFDC8D1000B64F3 /* PacketTunnel.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = B07CCB6D1A89414500A4F1E5 /* PacketTunnel.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		69836CE2212400AB00815672 /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69836CE1212400AB00815672 /* NetworkExtension.framework */; };
+		6E32A603AD865E0CDCD22FD1 /* Pods_SwiftV2Ray.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4AFF371650E641FA714BA35 /* Pods_SwiftV2Ray.framework */; };
 		957338B523FA941E0040B1A9 /* config.json in Resources */ = {isa = PBXBuildFile; fileRef = 957338B323FA941E0040B1A9 /* config.json */; };
 		957338B623FA941E0040B1A9 /* config.json in Resources */ = {isa = PBXBuildFile; fileRef = 957338B323FA941E0040B1A9 /* config.json */; };
 		957338B723FA941E0040B1A9 /* V2RayConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957338B423FA941E0040B1A9 /* V2RayConfig.swift */; };
@@ -37,8 +40,6 @@
 		95B5D80D23D2CCBD0051EC3C /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 95B5D80C23D2CCBD0051EC3C /* Home.storyboard */; };
 		95B5D81523D2CE6A0051EC3C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 95B5D81423D2CE6A0051EC3C /* Preview Assets.xcassets */; };
 		95B5D81723D2CF060051EC3C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 95B5D81623D2CF060051EC3C /* Images.xcassets */; };
-		A12CCC172B64FB7900A4EAC8 /* Tun2socks.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A12CCC162B64FB7900A4EAC8 /* Tun2socks.framework */; };
-		A12CCC182B652D3F00A4EAC8 /* Tun2socks.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A12CCC162B64FB7900A4EAC8 /* Tun2socks.framework */; };
 		B07CCB3D1A8940E600A4F1E5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07CCB3C1A8940E600A4F1E5 /* AppDelegate.swift */; };
 		C49ACF4D1A8AC97B00084324 /* PacketTunnelProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0D507F51A8943FD005D1195 /* PacketTunnelProvider.swift */; };
 /* End PBXBuildFile section */
@@ -68,6 +69,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		04F0969D2B67657100876EBB /* Tun2socks.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Tun2socks.framework; sourceTree = "<group>"; };
 		0FE6BBCC7F2BB5707C8B6B78 /* Pods-SwiftV2Ray.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftV2Ray.release.xcconfig"; path = "Target Support Files/Pods-SwiftV2Ray/Pods-SwiftV2Ray.release.xcconfig"; sourceTree = "<group>"; };
 		69836CE1212400AB00815672 /* NetworkExtension.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NetworkExtension.framework; path = System/Library/Frameworks/NetworkExtension.framework; sourceTree = SDKROOT; };
 		957338B323FA941E0040B1A9 /* config.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = config.json; sourceTree = "<group>"; };
@@ -97,7 +99,7 @@
 		95B5D81423D2CE6A0051EC3C /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		95B5D81623D2CF060051EC3C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		9EB527B618ED1C66404ECA1C /* Pods-SwiftV2Ray.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftV2Ray.debug.xcconfig"; path = "Target Support Files/Pods-SwiftV2Ray/Pods-SwiftV2Ray.debug.xcconfig"; sourceTree = "<group>"; };
-		A12CCC162B64FB7900A4EAC8 /* Tun2socks.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Tun2socks.framework; sourceTree = "<group>"; };
+		A4AFF371650E641FA714BA35 /* Pods_SwiftV2Ray.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftV2Ray.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B01F23AB1A8A8C5E0078C66D /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = PacketTunnel/Info.plist; sourceTree = SOURCE_ROOT; };
 		B07CCB371A8940E600A4F1E5 /* SwiftV2Ray.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftV2Ray.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B07CCB3B1A8940E600A4F1E5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -111,7 +113,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A12CCC182B652D3F00A4EAC8 /* Tun2socks.framework in Frameworks */,
+				6E32A603AD865E0CDCD22FD1 /* Pods_SwiftV2Ray.framework in Frameworks */,
+				04F0969E2B67657100876EBB /* Tun2socks.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -120,7 +123,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				69836CE2212400AB00815672 /* NetworkExtension.framework in Frameworks */,
-				A12CCC172B64FB7900A4EAC8 /* Tun2socks.framework in Frameworks */,
+				04F0969F2B67657100876EBB /* Tun2socks.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -130,8 +133,9 @@
 		690F9EC41FE5F38600F85684 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				A12CCC162B64FB7900A4EAC8 /* Tun2socks.framework */,
+				04F0969D2B67657100876EBB /* Tun2socks.framework */,
 				69836CE1212400AB00815672 /* NetworkExtension.framework */,
+				A4AFF371650E641FA714BA35 /* Pods_SwiftV2Ray.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";

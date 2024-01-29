@@ -37,45 +37,23 @@
         }
     ],
     "log": {
-        "loglevel": "debug",
+        "loglevel": "warning"
     },
     "outbounds":[
         {
-            "mux": {
-                "concurrency": -1,
-                "enabled": false,
-                "xudpConcurrency": 8,
-                "xudpProxyUDP443": ""
-            },
-            "protocol": "vmess",
+            "protocol": "shadowsocks",
             "settings": {
-                "vnext": [
+                "servers": [
                     {
-                        "address": "c33s3.jjcruises.com",
-                        "port": 5326,
-                        "users": [
-                            {
-                                "alterId": 0,
-                                "encryption": "",
-                                "flow": "",
-                                "id":"a3150c13-17e0-448a-82a3-c7a7f1a9d94b",
-                                "level": 8,
-                                "security": "auto"
-                            }
-                        ]
+                        "address": "211.99.112.174",
+                        "port": 5101,
+                        "method": "chacha20-ietf-poly1305",
+                        "password": "a3150c13-17e0-448a-82a3-c7a7f1a9d9",
+                        "ota": true,
+                        "level": 0
                     }
                 ]
             },
-            "streamSettings": {
-                "network": "tcp",
-                "security": "none",
-                "tcpSettings": {
-                    "header": {
-                        "type": "none"
-                    }
-                }
-            },
-            "tag": "proxy"
         },
         {
             "protocol": "freedom",
@@ -106,7 +84,3 @@
         ]
     }
 }
-
-
-
-

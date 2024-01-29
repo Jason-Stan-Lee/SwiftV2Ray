@@ -134,8 +134,8 @@ class SUHomeContentViewModel: ObservableObject, Codable {
             return
         }
 
-        let serverIP = PacketTunnelMessage.getIPAddress(domainName: (self.v2rayConfig.outbounds?[0].settingVMess?.vnext[0].address)!)
-        let packetTunnelMessage = PacketTunnelMessage(configData: configData, serverIP: serverIP)
+//        let serverIP = PacketTunnelMessage.getIPAddress(domainName: (self.v2rayConfig.outbounds?[0].settingVMess?.vnext[0].address)!)
+        let packetTunnelMessage = PacketTunnelMessage(configData: configData, serverIP: nil)
         VPNHelper.shared.open(with: packetTunnelMessage, completion: { (error) in
             completion?(error)
         })
@@ -152,12 +152,12 @@ class SUHomeContentViewModel: ObservableObject, Codable {
             return
         }
         
-        var vnext = Outbound.VMess.Item()
-        vnext.address = self.activingEndpoint?.info[VmessEndpoint.InfoKey.address.stringValue] as! String
-        vnext.users[0].id = self.activingEndpoint?.info[VmessEndpoint.InfoKey.uuid.stringValue] as! String
-        vnext.users[0].alterId = (self.activingEndpoint?.info[VmessEndpoint.InfoKey.aid.stringValue] as! NSString).integerValue
-        vnext.port = (self.activingEndpoint?.info[VmessEndpoint.InfoKey.port.stringValue] as! NSString).integerValue
-        self.v2rayConfig.outbounds?[0].settingVMess?.vnext = [vnext]
+//        var vnext = Outbound.VMess.Item()
+//        vnext.address = self.activingEndpoint?.info[VmessEndpoint.InfoKey.address.stringValue] as! String
+//        vnext.users[0].id = self.activingEndpoint?.info[VmessEndpoint.InfoKey.uuid.stringValue] as! String
+//        vnext.users[0].alterId = (self.activingEndpoint?.info[VmessEndpoint.InfoKey.aid.stringValue] as! NSString).integerValue
+//        vnext.port = (self.activingEndpoint?.info[VmessEndpoint.InfoKey.port.stringValue] as! NSString).integerValue
+//        self.v2rayConfig.outbounds?[0].settingVMess?.vnext = [vnext]
     }
 }
 

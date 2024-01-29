@@ -18,7 +18,8 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
         if let configData = message?.configData {
             
             let json = try? JSONSerialization.jsonObject(with: configData) as? [String: Any]
-            os_log("//--------------------------------- startTunnel: %{public}s", json?.description ?? "nil")
+            let outs = json?["outbounds"] as? [[String: Any]]
+            os_log("//--------------------------------- startTunnel: %{public}s", outs?[0].description ?? "nil")
             
             Tun2socksStartV2Ray(self, configData)
         } else {
@@ -63,14 +64,14 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
 
 extension PacketTunnelProvider {
     func setupTunnel(message: PacketTunnelMessage, _ completion: @escaping((_ error: Error?) -> Void)) {
-        guard let serverIP = message.serverIP else {
-            completion(NSError(domain: "PacketTunnel", code: -1, userInfo: ["error" : "没有IP地址"]))
-            return
-        }
+//        guard let serverIP = message.serverIP else {
+//            completion(NSError(domain: "PacketTunnel", code: -1, userInfo: ["error" : "没有IP地址"]))
+//            return
+//        }
         
-        os_log("//--------------------------------- setupTunnel serverIP: %{public}s", serverIP)
+        os_log("//--------------------------------- setupTunnel serverIP: %{public}s", "serverIP")
 
-        let networkSettings = NEPacketTunnelNetworkSettings(tunnelRemoteAddress: serverIP)
+        let networkSettings = NEPacketTunnelNetworkSettings(tunnelRemoteAddress: "211.99.112.174")
         networkSettings.mtu = 1500
         
         let ipv4Settings = NEIPv4Settings(addresses: ["26.26.26.2", "26.26.26.2"], subnetMasks: ["255.255.255.0", "255.255.255.252"])

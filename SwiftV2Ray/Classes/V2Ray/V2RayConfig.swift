@@ -318,13 +318,13 @@ struct Outbound: Codable {
         var servers: [Server] = [Server()]
         
         struct Server: Codable {
-            var email: String = ""
+            var email: String? = ""
             var address: String = ""
             var port: Int = 0
             var method: Method = .aes256cfb
             var password: String = ""
-            var ota: Bool = false
-            var level: Int = 0
+            var ota: Bool? = false
+            var level: Int? = 0
         }
 
         enum Method: String, Codable {
